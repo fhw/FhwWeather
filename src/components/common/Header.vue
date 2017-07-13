@@ -1,41 +1,36 @@
 <template>
-  <header id="index-header">
-    <el-row>
-      <el-menu mode="horizontal" theme="dark">
-        <el-col :xs="24" :sm="4" :md="9" :lg="11">
-          <el-menu-item index="1">天气图标</el-menu-item>
-        </el-col>
-        <el-col :xs="3" :sm="20" :md="15" :lg="13">
-          <el-menu-item index="2">7-10天预报</el-menu-item>
-          <el-menu-item index="3">实况天气</el-menu-item>
-          <el-menu-item index="4">每小时天气</el-menu-item>
-          <el-menu-item index="5">灾害预警</el-menu-item>
-          <el-menu-item index="6">生活指数</el-menu-item>
-          <el-menu-item index="7">空气质量</el-menu-item>
-        </el-col>
-        <el-button class="header-list-button">开关</el-button>
-      </el-menu>
-    </el-row>
-  </header>
+  <div id="silde-nav">
+    <mu-appbar title="FHW APP">
+      <mu-icon-button icon="menu" slot="left" @click="toggle(true)"/>
+      <mu-flat-button label="expand_more" slot="right"/>
+      <mu-icon-button icon="expand_more" slot="right"/>
+    </mu-appbar>
+    <mu-drawer :open="open" :docked="docked" @close="toggle()">
+      <mu-list @itemClick="docked ? '' : toggle()">
+        <mu-list-item title="Menu Item 1"/>
+        <mu-list-item title="Menu Item 2"/>
+        <mu-list-item title="Menu Item 3"/>
+        <mu-list-item v-if="docked" @click.native="open = false" title="Close"/>
+      </mu-list>
+    </mu-drawer>
+  </div>
 </template>
 <script>
-
+  export default {
+    data () {
+      return {
+        open: false,
+        docked: true
+      }
+    },
+    methods: {
+      toggle (flag) {
+        this.open = !this.open
+        this.docked = !flag
+      }
+    }
+  }
 </script>
-<style>
-  .header-list-button {
-    display: none;
-  }
+<style lang="scss">
 
-  @media screen and (max-width: 768px) {
-    .el-col:not(:first-child) .el-menu-item {
-      display: none;
-    }
-
-    .header-list-button {
-      position: absolute;
-      right: 10px;
-      top: 10px;
-      display: block;
-    }
-  }
 </style>
