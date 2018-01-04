@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <IndexHeader></IndexHeader>
+    <IndexHeader>
+      <img slot="back" src="./assets/icon/back.png" alt="">
+    </IndexHeader>
     <router-view></router-view>
   </div>
 </template>
@@ -21,5 +23,6 @@
     width: 100%;
     height: 100%;
     margin: 0;
+    background-color: #fafafa;
   }
 </style>
