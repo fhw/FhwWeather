@@ -1,7 +1,8 @@
 <template>
   <div id="all-weather">
     <div v-for="item1 in weatherData">
-      <div class="bg">{{item1.basic.location}}</div>
+      <div class="coordinates"></div>
+      <span class="coordinates-text">{{item1.basic.location}}</span>
       <ul>
         <li v-for="item2 in item1.daily_forecast">
           <p>预报日期:{{item2.date}}</p>
@@ -23,6 +24,7 @@
 </template>
 <script>
   import api from './../api/index'
+  import {mapMutations} from 'vuex'
 
   export default {
     data () {
@@ -30,7 +32,12 @@
         weatherData: {}
       }
     },
+    created () {
+      this.getAllWeather()
+      this.setHeaderTitle('近三天天气预报')
+    },
     methods: {
+      ...mapMutations(['setHeaderTitle']),
       getAllWeather: function () {
         const that = this
         if ('geolocation' in navigator) {
@@ -52,13 +59,24 @@
           console.log('地理位置服务不可用')
         }
       }
-    },
-    created () {
-      this.getAllWeather()
     }
   }
 
 </script>
 <style lang="scss">
   /*@import './../assets/styles/reset.scss';*/
+  #all-weather {
+    .coordinates {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      background: url("./../assets/icon/coordinates.png") no-repeat center;
+      background-size: contain;
+    }
+    .coordinates-text{
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+    }
+  }
 </style>

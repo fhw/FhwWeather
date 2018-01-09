@@ -1,5 +1,5 @@
 const state = {
-  headerTitle: 'title'
+  headerTitle: ''
 }
 const getters = {}
 const actions = {}

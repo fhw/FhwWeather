@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <IndexHeader>
-      <img slot="back" src="./assets/icon/back.png" alt="">
+      <div class="header-back" slot="back">
+      </div>
     </IndexHeader>
     <router-view></router-view>
   </div>
