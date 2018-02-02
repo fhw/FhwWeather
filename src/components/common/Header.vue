@@ -17,7 +17,6 @@
       return {}
     },
     mounted () {
-      console.log(this.common.headerTitle)
     },
     computed: {
       ...mapState({
@@ -49,8 +48,17 @@
           left: 50%;
           top: 50%;
           transform: translate(-50%, -50%);
-          width: 38px;
+          width: 25px;
         }
+        .header-back{
+          height: 50px;
+          width: 25px;
+          margin-left: 10px;
+          line-height: 50px;
+          background: url("./../../assets/icon/back.png") no-repeat center;
+          background-size: contain;
+        }
+
       }
       .middle {
         width: 100%;

@@ -1,8 +1,11 @@
 <template>
   <div id="all-weather">
     <div v-for="item1 in weatherData">
-      <div class="coordinates"></div>
-      <span class="coordinates-text">{{item1.basic.location}}</span>
+      <div class="coordinates-wrap">
+        <div class="coordinates"></div>
+
+        <span class="coordinates-text">{{item1.basic.location}}</span>
+      </div>
       <ul>
         <li v-for="item2 in item1.daily_forecast">
           <p>预报日期:{{item2.date}}</p>
@@ -66,17 +69,21 @@
 <style lang="scss">
   /*@import './../assets/styles/reset.scss';*/
   #all-weather {
-    .coordinates {
-      display: inline-block;
-      width: 40px;
-      height: 40px;
-      background: url("./../assets/icon/coordinates.png") no-repeat center;
-      background-size: contain;
+    .coordinates-wrap {
+
+      .coordinates {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        background: url("./../assets/icon/coordinates.png") no-repeat center;
+        background-size: contain;
+      }
+      .coordinates-text {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+      }
     }
-    .coordinates-text{
-      display: inline-block;
-      width: 40px;
-      height: 40px;
-    }
+
   }
 </style>
