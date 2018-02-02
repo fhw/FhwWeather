@@ -70,8 +70,12 @@
   /*@import './../assets/styles/reset.scss';*/
   #all-weather {
     .coordinates-wrap {
-
+      position: relative;
+      height: 40px;
       .coordinates {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
         display: inline-block;
         width: 40px;
         height: 40px;
@@ -79,9 +83,12 @@
         background-size: contain;
       }
       .coordinates-text {
+        position: absolute;
+        left: 40px;
         display: inline-block;
         width: 40px;
         height: 40px;
+        line-height: 40px;
       }
     }
 
