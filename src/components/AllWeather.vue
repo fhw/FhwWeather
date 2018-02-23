@@ -3,8 +3,10 @@
     <div v-for="item1 in weatherData">
       <div class="coordinates-wrap">
         <div class="coordinates"></div>
-
-        <span class="coordinates-text">{{item1.basic.location}}</span>
+        <div class="flex-column">
+          <span class="coordinates-text">{{item1.basic.location}}</span>
+          <span class="coordinates-text">{{item1.update.loc}}</span>
+        </div>
       </div>
       <ul>
         <li v-for="item2 in item1.daily_forecast">
@@ -27,7 +29,7 @@
 </template>
 <script>
   import api from './../api/index'
-  import {mapMutations} from 'vuex'
+  import {mapState, mapMutations, mapActions} from 'vuex'
 
   export default {
     data () {
@@ -35,32 +37,28 @@
         weatherData: {}
       }
     },
+    computed: {
+      ...mapState(['common'])
+    },
     created () {
-      this.getAllWeather()
       this.setHeaderTitle('近三天天气预报')
+      this.getAllWeather()
     },
     methods: {
       ...mapMutations(['setHeaderTitle']),
+      ...mapActions(['getCurrentPosition']),
       getAllWeather: function () {
-        const that = this
-        if ('geolocation' in navigator) {
-          /* 地理位置服务可用 */
-          navigator.geolocation.getCurrentPosition((position) => {
-            api.getAllWeather({
-              location: `${position.coords.longitude},${position.coords.latitude}`
-              // location: 'beijing'
-            }).then(function (res) {
-              that.weatherData = res.data.HeWeather6
-              console.log(that.weatherData)
-            })
+        const self = this
+        const position = self.common.currentPosition
+        self.getCurrentPosition().then(() => {
+          api.getAllWeather({
+            location: `${position.coords.longitude},${position.coords.latitude}`
+          }).then(function (res) {
+            self.weatherData = res.data.HeWeather6
           }, (error) => {
             console.log(error)
           })
-          console.log('地理位置服务可用')
-        } else {
-          /* 地理位置服务不可用 */
-          console.log('地理位置服务不可用')
-        }
+        })
       }
     }
   }
@@ -70,25 +68,24 @@
   /*@import './../assets/styles/reset.scss';*/
   #all-weather {
     .coordinates-wrap {
-      position: relative;
-      height: 40px;
+      display: flex;
+      height: 1.2526rem;
+      margin-top: $fs-10/2;
+
+      .flex-column{
+        margin-top: 10px;
+      }
+
       .coordinates {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        display: inline-block;
-        width: 40px;
-        height: 40px;
-        background: url("./../assets/icon/coordinates.png") no-repeat center;
-        background-size: contain;
+        width: 1.2526rem;
+        height: 1.2526rem;
+        background: url("./../assets/icon/coordinates.png") no-repeat center center;
+        background-size: 0.65rem 0.65rem;
       }
       .coordinates-text {
-        position: absolute;
-        left: 40px;
         display: inline-block;
-        width: 40px;
-        height: 40px;
-        line-height: 40px;
+        /*line-height: 0.6263rem;*/
+        font-size: 0.325rem;
       }
     }
 

@@ -33,7 +33,7 @@
 
 <style lang="scss" scoped>
   .index-nav {
-    padding-top: 10px;
+    padding-top: 0.2632rem;
     .nav-list {
       display: flex;
       width: 100%;
@@ -47,14 +47,14 @@
         a {
           display: inline-block;
           width: 90%;
-          height: 30px;
-          line-height: 30px;
-          margin: 10px 2%;
+          height: 0.7895rem;
+          line-height: 0.7895rem;
+          margin: 0.2632rem 2%;
           background-color: #2979FF;
-          font-size: 14px;
+          font-size: 0.3684rem;
           color: #ffffff;
-          border-radius: 5px;
-          box-shadow: 2px 2px 2px rgba(41, 121, 255, 0.5);
+          border-radius: 0.1316rem;
+          box-shadow: 0.0526rem 0.0526rem 0.0526rem rgba(41, 121, 255, 0.5);
         }
       }
     }

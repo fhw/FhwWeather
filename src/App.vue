@@ -10,12 +10,16 @@
 
 <script>
   import IndexHeader from './components/common/Header.vue'
+  // import {mapActions} from 'vuex'
   //  import footer from 'components'
   export default {
     components: {
       IndexHeader
     },
-    name: 'app'
+    created () {
+    },
+    methods: {
+    }
   }
 </script>
 

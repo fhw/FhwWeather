@@ -3,9 +3,12 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import './assets/styles/reset.scss'
+// import './assets/styles/reset.scss'
+// import './assets/styles/global.scss'
 import store from './store'
+import flexible from 'amfe-flexible/index'
 
+flexible
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
