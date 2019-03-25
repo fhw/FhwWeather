@@ -1,36 +1,45 @@
 const state = {
-  headerTitle: '',
   currentPosition: {
     coords: {
-      longitude: '39.90498734',
-      latitude: '116.4052887'
+      longitude: '',
+      latitude: ''
     }
   }
 }
 const getters = {}
 const actions = {
-  getCurrentPosition ({commit, state}) {
+  getCurrentPosition ({commit, state}, successCallback) {
     if ('geolocation' in navigator) {
-      return navigator.geolocation.getCurrentPosition((position) => {
-        // position.coords.longitude
-        // position.coords.latitude
+      navigator.geolocation.getCurrentPosition((position) => {
         commit('setCurrentPosition', position)
-        console.log(position)
+        successCallback()
       }, (error) => {
-        commit('setCurrentPosition', state.currentPosition)
-        console.log(error)
+        let msg = ''
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            msg = '用户拒绝对获取地理位置的请求。'
+            break
+          case error.POSITION_UNAVAILABLE:
+            msg = '位置信息是不可用的。'
+            break
+          case error.TIMEOUT:
+            msg = '请求用户地理位置超时。'
+            break
+          case error.UNKNOWN_ERROR:
+            msg = '未知错误。'
+            break
+          default :
+            msg = '未知错误。'
+            break
+        }
+        commit('showToast', msg)
       })
     } else {
-      return new Promise((resolve, reject) => {
-      })
+      console.log('浏览器不支持位置信息获取')
     }
   }
 }
 const mutations = {
-  // 设置header标题
-  setHeaderTitle: (state, data) => {
-    state.headerTitle = data
-  },
   setCurrentPosition (state, data) {
     state.currentPosition = !data ? state.currentPosition : data
   }

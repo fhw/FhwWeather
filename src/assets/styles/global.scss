@@ -1,15 +1,23 @@
-$fs-10: 10px;
-$fs-12: 12px;
-$fs-16: 16px;
-$fs-18: 18px;
-$fs-20: 20px;
-$fs-22: 22px;
-$fs-24: 24px;
-$fs-26: 26px;
-$fs-28: 28px;
-$fs-30: 30px;
-$fs-32: 32px;
-$fs-36: 36px;
+@function px2em($px) {
+  @return ($px / 37.5) * 1rem;
+}
+
+$fs-10: px2em(10);
+$fs-12: px2em(12);
+$fs-16: px2em(16);
+$fs-18: px2em(18);
+$fs-20: px2em(20);
+$fs-22: px2em(22);
+$fs-24: px2em(24);
+$fs-26: px2em(26);
+$fs-28: px2em(28);
+$fs-30: px2em(30);
+$fs-32: px2em(32);
+$fs-36: px2em(36);
+
+.fc-white {
+  color: #ffffff;
+}
 
 .flex-column {
   display: flex;

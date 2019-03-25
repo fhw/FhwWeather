@@ -1,6 +1,6 @@
 <template>
   <div id="all-weather">
-    <div v-for="item1 in weatherData">
+    <div v-for="(item1, index) in weatherData" :key="index">
       <div class="coordinates-wrap">
         <div class="coordinates"></div>
         <div class="flex-column">
@@ -8,27 +8,28 @@
           <span class="coordinates-text">{{item1.update.loc}}</span>
         </div>
       </div>
-      <ul>
-        <li v-for="item2 in item1.daily_forecast">
-          <p>预报日期:{{item2.date}}</p>
-          <p>日出时间:{{item2.sr}}</p>
-          <p>日落时间:{{item2.ss}}</p>
-          <p>月升时间:{{item2.mr}}</p>
-          <p>月落时间:{{item2.ms}}</p>
+      <ul class="w-list">
+        <li v-for="(item2, index) in item1.daily_forecast" :key="index">
+          <p>{{$dayjs(item2.date).format('M-DD')}}</p>
+          <div>
+            <img class="w-status-icon" :src="require(`./../../static/weatherIcon/${item2.cond_code_d}.png`)" alt="">
+          </div>
+          <div>
+            <img class="w-status-icon" :src="require(`./../../static/weatherIcon/${item2.cond_code_n}.png`)" alt="">
+          </div>
           <p>最高温度:{{item2.tmp_max}}</p>
           <p>最低温度:{{item2.tmp_min}}</p>
-          <p>
-            <img :src="`./../../static/weatherIcon/${item2.cond_code_d}.png`" alt="">
-          </p>
+          <p>风向:{{item2.wind_dir}}</p>
+          <p>风力:{{item2.wind_sc}}</p>
+          <p>相对湿度:{{item2.hum}}</p>
+          <p>紫外线强度指数:{{item2.uv_index}}</p>
         </li>
       </ul>
     </div>
-
-
   </div>
 </template>
 <script>
-  import api from './../api/index'
+  import heweatherApi from '@/api/heweatherApi'
   import {mapState, mapMutations, mapActions} from 'vuex'
 
   export default {
@@ -41,53 +42,72 @@
       ...mapState(['common'])
     },
     created () {
-      this.setHeaderTitle('近三天天气预报')
-      this.getAllWeather()
+      this.getCurrentPosition(this.getAllWeather)
     },
     methods: {
-      ...mapMutations(['setHeaderTitle']),
+      ...mapMutations(['showToast']),
       ...mapActions(['getCurrentPosition']),
-      getAllWeather: function () {
-        const self = this
-        const position = self.common.currentPosition
-        self.getCurrentPosition().then(() => {
-          api.getAllWeather({
-            location: `${position.coords.longitude},${position.coords.latitude}`
-          }).then(function (res) {
-            self.weatherData = res.data.HeWeather6
-          }, (error) => {
-            console.log(error)
-          })
+      getAllWeather () {
+        const position = this.common.currentPosition
+        heweatherApi.getAllWeather({
+          location: `${position.coords.longitude},${position.coords.latitude}`
+        }).then((res) => {
+          this.weatherData = res
+        }, (error) => {
+          console.log(error)
+        })
+
+        heweatherApi.getLifestyle({
+          location: `${position.coords.longitude},${position.coords.latitude}`
+        })
+        heweatherApi.getAirNow({
+          location: `${position.coords.longitude},${position.coords.latitude}`
         })
       }
     }
   }
 
 </script>
-<style lang="scss">
-  /*@import './../assets/styles/reset.scss';*/
+<style lang="scss" scoped>
   #all-weather {
+    font-size: px2em(12);
+
     .coordinates-wrap {
       display: flex;
-      height: 1.2526rem;
-      margin-top: $fs-10/2;
+      align-items: center;
+      height: px2em(50);
+      margin-top: 5px;
 
-      .flex-column{
-        margin-top: 10px;
+      .flex-column {
+        margin-top: px2em(10);
       }
 
       .coordinates {
-        width: 1.2526rem;
-        height: 1.2526rem;
-        background: url("./../assets/icon/coordinates.png") no-repeat center center;
-        background-size: 0.65rem 0.65rem;
+        width: px2em(25);
+        height: px2em(25);
+        background: url("./../assets/icon/coordinates.png") no-repeat center;
+        background-size: contain;
       }
+
       .coordinates-text {
         display: inline-block;
-        /*line-height: 0.6263rem;*/
-        font-size: 0.325rem;
+        font-size: px2em(12);
       }
     }
 
+    .w-list {
+      list-style: none;
+
+      li {
+        margin: 0 px2em(10) px2em(10);
+        padding: px2em(10);
+        border: px2em(1) solid #2962ff;
+        border-radius: 5px;
+      }
+
+      .w-status-icon {
+        width: px2em(30);
+      }
+    }
   }
 </style>

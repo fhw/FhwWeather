@@ -2,7 +2,7 @@
   <div class="index-nav">
     <div class="nav-list">
       <div class="nav-item">
-        <router-link to="/AllWeather">3天天气预报</router-link>
+        <router-link to="/AllWeather">近日天气预报</router-link>
       </div>
       <div class="nav-item">
         <router-link to="/">天气预报</router-link>
@@ -18,15 +18,12 @@
 </template>
 
 <script>
-  import {mapMutations} from 'vuex'
 
   export default {
     // name: 'index-nav'
     created () {
-      this.setHeaderTitle('首页')
     },
     methods: {
-      ...mapMutations(['setHeaderTitle'])
     }
   }
 </script>
@@ -55,6 +52,7 @@
           color: #ffffff;
           border-radius: 0.1316rem;
           box-shadow: 0.0526rem 0.0526rem 0.0526rem rgba(41, 121, 255, 0.5);
+          text-decoration: none;
         }
       }
     }

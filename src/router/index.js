@@ -18,16 +18,23 @@ const AllWeather = () => import('@/components/AllWeather.vue').catch(() => {
 })
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '',
       name: 'IndexNav',
-      component: IndexNav
+      component: IndexNav,
+      meta: {
+        name: '首页'
+      }
     },
     {
       path: '/AllWeather',
       name: 'AllWeather',
-      component: AllWeather
+      component: AllWeather,
+      meta: {
+        name: '近日天气预报'
+      }
     }
   ]
 })

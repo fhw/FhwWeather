@@ -1,25 +1,25 @@
 <template>
   <div id="app">
-    <IndexHeader>
-      <div class="header-back" slot="back">
-      </div>
-    </IndexHeader>
-    <router-view></router-view>
+    <Main>
+      <router-view></router-view>
+    </Main>
+    <toast></toast>
   </div>
 </template>
 
 <script>
-  import IndexHeader from './components/common/Header.vue'
+  import Main from './components/Main'
+  import Toast from './components/common/Toast'
   // import {mapActions} from 'vuex'
-  //  import footer from 'components'
+
   export default {
     components: {
-      IndexHeader
+      Main,
+      Toast
     },
     created () {
     },
-    methods: {
-    }
+    methods: {}
   }
 </script>
 
@@ -28,6 +28,5 @@
     width: 100%;
     height: 100%;
     margin: 0;
-    background-color: #fafafa;
   }
 </style>

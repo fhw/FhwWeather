@@ -3,13 +3,39 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-// import './assets/styles/reset.scss'
-// import './assets/styles/global.scss'
 import store from './store'
-import flexible from 'amfe-flexible/index'
+import 'amfe-flexible'
+import 'normalize.css'
+import './assets/styles/reset.css'
+import dayjs from 'dayjs'
 
-flexible
+import {
+  MdDialog,
+  MdSnackbar,
+  MdButton,
+  MdIcon,
+  MdApp,
+  MdList,
+  MdDrawer,
+  MdToolbar,
+  MdContent
+} from 'vue-material/dist/components'
+import 'vue-material/dist/vue-material.min.css'
+import 'vue-material/dist/theme/default.css'
+
+Vue.use(MdDialog)
+Vue.use(MdSnackbar)
+Vue.use(MdButton)
+Vue.use(MdIcon)
+Vue.use(MdApp)
+Vue.use(MdList)
+Vue.use(MdDrawer)
+Vue.use(MdToolbar)
+Vue.use(MdContent)
+
 Vue.config.productionTip = false
+
+Vue.prototype.$dayjs = dayjs
 
 /* eslint-disable no-new */
 new Vue({
