@@ -8,19 +8,19 @@
 </template>
 
 <script>
-  import Main from './components/Main'
-  import Toast from './components/common/Toast'
-  // import {mapActions} from 'vuex'
+import Main from './components/Main'
+import Toast from './components/common/Toast'
+// import {mapActions} from 'vuex'
 
-  export default {
-    components: {
-      Main,
-      Toast
-    },
-    created () {
-    },
-    methods: {}
-  }
+export default {
+  components: {
+    Main,
+    Toast
+  },
+  created () {
+  },
+  methods: {}
+}
 </script>
 
 <style>

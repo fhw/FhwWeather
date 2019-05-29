@@ -8,7 +8,7 @@ const state = {
 }
 const getters = {}
 const actions = {
-  getCurrentPosition ({commit, state}, successCallback) {
+  getCurrentPosition ({ commit, state }, successCallback) {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
         commit('setCurrentPosition', position)

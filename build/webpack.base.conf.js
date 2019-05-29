@@ -1,7 +1,8 @@
 var path = require('path')
 var utils = require('./utils')
 var config = require('../config')
-var vueLoaderConfig = require('./vue-loader.conf')
+// var vueLoaderConfig = require('./vue-loader.conf')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -25,6 +26,9 @@ module.exports = {
       '@': resolve('src')
     }
   },
+  plugins: [
+    new VueLoaderPlugin()
+  ],
   module: {
     rules: [
       {
@@ -39,16 +43,24 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue-loader',
-        options: vueLoaderConfig
+        // options: vueLoaderConfig
       },
+      // {
+      //   test: /\.js$/,
+      //   loader: 'babel-loader',
+      //   include: [resolve('src')],
+      //   exclude: /node_modules/,
+      //   options: {
+      //     sourceMap: true,
+      //   }
+      // },
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [resolve('src')],
-        exclude: /node_modules/,
-        options: {
-          sourceMap: true,
-        }
+        exclude: file => (
+          /node_modules/.test(file) &&
+          !/\.vue\.js/.test(file)
+        )
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -67,14 +79,31 @@ module.exports = {
         }
       },
       // {
+      //   test: /\.css$/,
+      //   use: [
+      //     {
+      //       loader: 'vue-style-loader'
+      //     },
+      //     {
+      //       loader: 'css-loader'
+      //     }
+      //   ]
+      // },
+      // {
+      //   test: /\.less$/,
+      //   use: [
+      //     'vue-style-loader',
+      //     'css-loader',
+      //     'less-loader'
+      //   ]
+      // },
+      // {
       //   test: /\.scss$/,
-      //   use: [{
-      //     loader: "style-loader" // 将 JS 字符串生成为 style 节点
-      //   }, {
-      //     loader: "css-loader" // 将 CSS 转化成 CommonJS 模块
-      //   }, {
-      //     loader: "sass-loader" // 将 Sass 编译成 CSS
-      //   }]
+      //   use: [
+      //     "vue-style-loader", // 将 JS 字符串生成为 style 节点
+      //     "css-loader", // 将 CSS 转化成 CommonJS 模块
+      //     "sass-loader" // 将 Sass 编译成 CSS
+      //   ]
       // }
     ]
   }

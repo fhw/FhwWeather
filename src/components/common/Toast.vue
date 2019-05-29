@@ -10,26 +10,26 @@
 </template>
 
 <script>
-  import {mapState, mapMutations} from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
-  export default {
-    data () {
-      return {
-        show: false
-      }
-    },
-    computed: {
-      ...mapState(['toast'])
-    },
-    methods: {
-      ...mapMutations(['setShow'])
-    },
-    watch: {
-      'toast.show' (val) {
-        this.show = val
-      }
+export default {
+  data () {
+    return {
+      show: false
+    }
+  },
+  computed: {
+    ...mapState(['toast'])
+  },
+  methods: {
+    ...mapMutations(['setShow'])
+  },
+  watch: {
+    'toast.show' (val) {
+      this.show = val
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>

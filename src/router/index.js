@@ -10,12 +10,11 @@ function errorComponent () {
   console.log('组件加载失败')
 }
 
-const IndexNav = () => import('@/components/IndexNav.vue').catch(() => {
-  errorComponent()
-})
-const AllWeather = () => import('@/components/AllWeather.vue').catch(() => {
-  errorComponent()
-})
+function syncComponent (name) {
+  return import(/* webpackChunkName: "[request][index]" */ `../components/${name}`).catch(() => {
+    errorComponent()
+  })
+}
 
 export default new Router({
   mode: 'history',
@@ -23,7 +22,7 @@ export default new Router({
     {
       path: '',
       name: 'IndexNav',
-      component: IndexNav,
+      component: syncComponent('IndexNav'),
       meta: {
         name: '首页'
       }
@@ -31,7 +30,7 @@ export default new Router({
     {
       path: '/AllWeather',
       name: 'AllWeather',
-      component: AllWeather,
+      component: syncComponent('AllWeather'),
       meta: {
         name: '近日天气预报'
       }

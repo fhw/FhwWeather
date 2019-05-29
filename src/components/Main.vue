@@ -27,37 +27,37 @@
   </div>
 </template>
 <script>
-  import {mapState} from 'vuex'
+import { mapState } from 'vuex'
 
-  export default {
-    data () {
-      return {
-        headerTitle: '',
-        menuVisible: false
-      }
+export default {
+  data () {
+    return {
+      headerTitle: '',
+      menuVisible: false
+    }
+  },
+  mounted () {
+  },
+  computed: {
+    ...mapState({
+      common: 'common'
+    })
+  },
+  methods: {
+    backFunc () {
+      this.$router.go(-1)
     },
-    mounted () {
-    },
-    computed: {
-      ...mapState({
-        common: 'common'
-      })
-    },
-    methods: {
-      backFunc () {
-        this.$router.go(-1)
-      },
-      toRouter (url) {
-        this.$router.push(url)
-        this.menuVisible = false
-      }
-    },
-    watch: {
-      '$route' () {
-        this.headerTitle = this.$route.meta.name
-      }
+    toRouter (url) {
+      this.$router.push(url)
+      this.menuVisible = false
+    }
+  },
+  watch: {
+    '$route' () {
+      this.headerTitle = this.$route.meta.name
     }
   }
+}
 </script>
 <style lang="scss">
   .slide-nav, .md-app{

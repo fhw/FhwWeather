@@ -19,13 +19,13 @@
 
 <script>
 
-  export default {
-    // name: 'index-nav'
-    created () {
-    },
-    methods: {
-    }
+export default {
+  // name: 'index-nav'
+  created () {
+  },
+  methods: {
   }
+}
 </script>
 
 <style lang="scss" scoped>

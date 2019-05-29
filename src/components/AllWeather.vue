@@ -29,43 +29,43 @@
   </div>
 </template>
 <script>
-  import heweatherApi from '@/api/heweatherApi'
-  import {mapState, mapMutations, mapActions} from 'vuex'
+import heweatherApi from '@/api/heweatherApi'
+import { mapState, mapMutations, mapActions } from 'vuex'
 
-  export default {
-    data () {
-      return {
-        weatherData: {}
-      }
-    },
-    computed: {
-      ...mapState(['common'])
-    },
-    created () {
-      this.getCurrentPosition(this.getAllWeather)
-    },
-    methods: {
-      ...mapMutations(['showToast']),
-      ...mapActions(['getCurrentPosition']),
-      getAllWeather () {
-        const position = this.common.currentPosition
-        heweatherApi.getAllWeather({
-          location: `${position.coords.longitude},${position.coords.latitude}`
-        }).then((res) => {
-          this.weatherData = res
-        }, (error) => {
-          console.log(error)
-        })
+export default {
+  data () {
+    return {
+      weatherData: {}
+    }
+  },
+  computed: {
+    ...mapState(['common'])
+  },
+  created () {
+    this.getCurrentPosition(this.getAllWeather)
+  },
+  methods: {
+    ...mapMutations(['showToast']),
+    ...mapActions(['getCurrentPosition']),
+    getAllWeather () {
+      const position = this.common.currentPosition
+      heweatherApi.getAllWeather({
+        location: `${position.coords.longitude},${position.coords.latitude}`
+      }).then((res) => {
+        this.weatherData = res
+      }, (error) => {
+        console.log(error)
+      })
 
-        heweatherApi.getLifestyle({
-          location: `${position.coords.longitude},${position.coords.latitude}`
-        })
-        heweatherApi.getAirNow({
-          location: `${position.coords.longitude},${position.coords.latitude}`
-        })
-      }
+      heweatherApi.getLifestyle({
+        location: `${position.coords.longitude},${position.coords.latitude}`
+      })
+      heweatherApi.getAirNow({
+        location: `${position.coords.longitude},${position.coords.latitude}`
+      })
     }
   }
+}
 
 </script>
 <style lang="scss" scoped>
