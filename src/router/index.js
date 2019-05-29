@@ -11,7 +11,7 @@ function errorComponent () {
 }
 
 function syncComponent (name) {
-  return import(/* webpackChunkName: "[request][index]" */ `../components/${name}`).catch(() => {
+  return () => import(/* webpackChunkName: "[request][index]" */ `../components/${name}`).catch(() => {
     errorComponent()
   })
 }

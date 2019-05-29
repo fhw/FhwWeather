@@ -43,17 +43,7 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue-loader',
-        // options: vueLoaderConfig
       },
-      // {
-      //   test: /\.js$/,
-      //   loader: 'babel-loader',
-      //   include: [resolve('src')],
-      //   exclude: /node_modules/,
-      //   options: {
-      //     sourceMap: true,
-      //   }
-      // },
       {
         test: /\.js$/,
         loader: 'babel-loader',
@@ -77,34 +67,7 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
-      },
-      // {
-      //   test: /\.css$/,
-      //   use: [
-      //     {
-      //       loader: 'vue-style-loader'
-      //     },
-      //     {
-      //       loader: 'css-loader'
-      //     }
-      //   ]
-      // },
-      // {
-      //   test: /\.less$/,
-      //   use: [
-      //     'vue-style-loader',
-      //     'css-loader',
-      //     'less-loader'
-      //   ]
-      // },
-      // {
-      //   test: /\.scss$/,
-      //   use: [
-      //     "vue-style-loader", // 将 JS 字符串生成为 style 节点
-      //     "css-loader", // 将 CSS 转化成 CommonJS 模块
-      //     "sass-loader" // 将 Sass 编译成 CSS
-      //   ]
-      // }
+      }
     ]
   }
 }
