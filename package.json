@@ -72,7 +72,7 @@
     "mini-css-extract-plugin": "^0.7.0",
     "mocha": "^3.2.0",
     "nightwatch": "^0.9.12",
-    "node-notifier": "^5.4.0",
+    "node-notifier": "^8.0.1",
     "node-sass": "^4.5.3",
     "opn": "^4.0.2",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
