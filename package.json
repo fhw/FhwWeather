@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "amfe-flexible": "^2.2.1",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "dayjs": "^1.8.14",
     "normalize.css": "^8.0.1",
     "vue": "^2.6.10",
